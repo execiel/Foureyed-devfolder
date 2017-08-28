@@ -1,12 +1,16 @@
-package com.feg.tds.desktop;
+package com.spp.game.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.feg.tds.MainGame;
+import com.spp.game.sppGame;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		new LwjglApplication(new MainGame(), config);
+		config.width = sppGame.WIDTH;
+		config.height = sppGame.HEIGHT;
+		config.foregroundFPS = 60;
+		config.backgroundFPS = 60;
+		new LwjglApplication(new sppGame(), config);
 	}
 }
