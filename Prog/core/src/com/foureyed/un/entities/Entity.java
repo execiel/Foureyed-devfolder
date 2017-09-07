@@ -5,6 +5,16 @@ import com.badlogic.gdx.math.Vector2;
 
 public abstract class Entity {
 	
+	/*
+	 * En entity är ett objekt i spelet exempelvis tile, spelare, fiender
+	 * I princip allt som kommer vara på banan
+	 * de har en render och update för att ritas och hantera eventuell logik
+	 * de har en konstruktor för att kallas i början
+	 * de har en destroy som kallas sist
+	 * de har en layer som hanterar vilket lager det ritas ut på
+	 * och en EntityID id som håller kåll på vilket entity det är
+	 * */
+	
 	public Vector2 pos;
 	public Vector2 size;
 	public EntityID id;

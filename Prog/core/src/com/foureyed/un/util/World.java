@@ -10,6 +10,14 @@ import com.foureyed.un.entities.Entity;
 import com.foureyed.un.entities.EntityID;
 
 public class World {
+	
+	/*
+	 * World är en bana i spelet i princip
+	 * den har en map som är kartan
+	 * den har en lista av entities som den renderar och updaterar
+	 * den har en gravitation
+	 * */
+	
 	public ArrayList<Entity> entities;
 	public boolean removeEntities = false;
 	public float gravity;
@@ -40,11 +48,13 @@ public class World {
 		for(Entity e : entities) {
 			if(e.active) e.update();
 			if(e.id == EntityID.PLAYER) {
+				//sätt kamerans position till spelarens
 				Vector3 pos = new  Vector3(e.pos.x, e.pos.y, cam.position.z);
 				cam.position.lerp(pos, 0.1f);
 			}
 		}
 		
+		//förhindrar kameran att åka utanför kartan
 		if(cam.position.y >= -feGame.HEIGHT/2) cam.position.y = -feGame.HEIGHT/2;
 		if(cam.position.y < -map.getHeight()+feGame.HEIGHT/2+32) cam.position.y = -map.getHeight()+feGame.HEIGHT/2+32;
 		if(cam.position.x < feGame.WIDTH/2) cam.position.x = feGame.WIDTH/2;

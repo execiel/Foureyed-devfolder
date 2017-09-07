@@ -11,9 +11,12 @@ import com.foureyed.un.util.GravCollider;
 import com.foureyed.un.util.World;
 
 public class Player extends Entity{
-
+	
+	//spelarens grav kollider som sköter kollisioner och gravitiation
 	GravCollider gcol;
+	//Världen som spelaren är i
 	World world;
+	//maxspeed = högsta hastigheten, xvel = nuvarande hastigheten
 	private float maxSpeed = 5, xvel = .5f;
 	
 	
@@ -32,14 +35,17 @@ public class Player extends Entity{
 	@Override
 	public void update() {
 		
+		//ökar xvel konstant
 		xvel+=0.5f;
 		if(xvel >= maxSpeed) xvel = maxSpeed;
 		
+		//spelarens rörelse
 		if(Gdx.input.isKeyPressed(Input.Keys.A))
 			pos.x-=xvel;
 		else if(Gdx.input.isKeyPressed(Input.Keys.D))
 			pos.x+=xvel;
 		else
+			//återsställer xvel när man inte rör sig
 			xvel = 1f;
 		
 		if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) gcol.jump();

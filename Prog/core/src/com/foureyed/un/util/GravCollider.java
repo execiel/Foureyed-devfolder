@@ -6,6 +6,8 @@ import com.foureyed.un.entities.EntityID;
 
 public class GravCollider {
 	
+	/* Sköter spelarens fysik (för tillfället men kan sköta flera sakers) */
+	
 	private Entity ent;
 	private World world;
 	private float maxSpeed;

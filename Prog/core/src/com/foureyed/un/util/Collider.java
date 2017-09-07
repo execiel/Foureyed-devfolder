@@ -3,6 +3,10 @@ package com.foureyed.un.util;
 import com.badlogic.gdx.math.Vector2;
 
 public class Collider {
+	/*
+	 * används för att kolla kollisioner
+	 * */
+	
 	public Vector2 pos;
 	public Vector2 size;
 	

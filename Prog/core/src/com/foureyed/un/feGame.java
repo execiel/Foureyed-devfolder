@@ -9,6 +9,7 @@ import com.foureyed.un.gamestates.Playstate;
 
 public class feGame extends ApplicationAdapter {
 	
+	//Fönstret bredd och höjd
 	public static final int WIDTH = 720;
 	public static final int HEIGHT = 480;
 	
@@ -25,7 +26,7 @@ public class feGame extends ApplicationAdapter {
 	public void render () {
 		Gdx.gl.glClearColor(.1f, .1f, .1f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		
+		//Rita och updatera ut nuvarande gamestate om det finns
 		if(gamestate != null) {
 			gamestate.render(batch);
 			gamestate.update();
@@ -35,9 +36,10 @@ public class feGame extends ApplicationAdapter {
 	
 	
 	public static void setState(Gamestate g) {
+		//Om det redan finns ett gamestate så se till att destroy kallas
 		if(gamestate != null) gamestate.destroy();
 		gamestate = g;
-		gamestate.init();	
+		gamestate.init(); //Kalla init
 		System.out.println(gamestate.getName() + " is current gamestate!");
 	}
 	

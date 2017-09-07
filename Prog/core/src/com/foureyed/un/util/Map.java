@@ -7,6 +7,14 @@ import com.foureyed.un.entities.Player;
 import com.foureyed.un.entities.Tile;
 
 public class Map {
+	/*
+	 * Map har en pixmap, som används för att kunna få färgen från en specifik pixel
+	 * allt den gär är att loop alla rader på x för alla rader på y och på så sätt kollar efter färgen på varje pixel
+	 * beroende på färgen lägger den till olika entities i banans entity lista
+	 * getwidth och getheight används för att få bredden på mapen (i tiles dvs 32ggr större)
+	 * */
+	
+	
 	Pixmap pm;
 	
 	public Map(String path, World world) {
