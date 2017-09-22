@@ -24,7 +24,7 @@ public class feGame extends ApplicationAdapter {
 
 	@Override
 	public void render () {
-		Gdx.gl.glClearColor(.1f, .1f, .1f, 1);
+		Gdx.gl.glClearColor(0.4f, 0.5f, 0.65f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		//Rita och updatera ut nuvarande gamestate om det finns
 		if(gamestate != null) {

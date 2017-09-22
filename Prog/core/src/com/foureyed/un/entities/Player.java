@@ -8,19 +8,19 @@ import com.foureyed.un.feGame;
 import com.foureyed.un.gamestates.Playstate;
 import com.foureyed.un.util.Assets;
 import com.foureyed.un.util.GravCollider;
-import com.foureyed.un.util.World;
+import com.foureyed.un.util.Level;
 
 public class Player extends Entity{
 	
 	//spelarens grav kollider som sköter kollisioner och gravitiation
 	GravCollider gcol;
 	//Världen som spelaren är i
-	World world;
+	Level world;
 	//maxspeed = högsta hastigheten, xvel = nuvarande hastigheten
 	private float maxSpeed = 5, xvel = .5f;
 	
 	
-	public Player(Vector2 pos, World world) {
+	public Player(Vector2 pos, Level world) {
 		super(pos, new Vector2(32, 32), EntityID.PLAYER, 2);
 		
 		this.world = world;

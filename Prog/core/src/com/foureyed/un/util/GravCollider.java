@@ -9,7 +9,7 @@ public class GravCollider {
 	/* Sköter spelarens fysik (för tillfället men kan sköta flera sakers) */
 	
 	private Entity ent;
-	private World world;
+	private Level world;
 	private float maxSpeed;
 	
 	private float grav;
@@ -19,7 +19,7 @@ public class GravCollider {
 	private boolean doJump;
 	private float jumpCounter = 0, jumpHeight = 20;
 	
-	public GravCollider(Entity ent, World world, float maxSpeed) {
+	public GravCollider(Entity ent, Level world, float maxSpeed) {
 		this.ent = ent;
 		this.world = world;
 		this.maxSpeed = maxSpeed;
