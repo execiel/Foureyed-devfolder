@@ -12,8 +12,8 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.foureyed.un.feGame;
 import com.foureyed.un.entities.Entity;
 import com.foureyed.un.entities.EntityID;
+import com.foureyed.un.gamestates.Playstate;
 
-import box2dLight.DirectionalLight;
 import box2dLight.PointLight;
 import box2dLight.RayHandler;
 
@@ -36,11 +36,13 @@ public class Level {
 	public RayHandler rayhandler;
 	private World world;
 	private PointLight pl;
+	public Playstate state;
 	
-	public Level(float gravity, Camera cam, int level) {
+	public Level(float gravity, Camera cam, int level, Playstate state) {
 		this.gravity = gravity;
 		this.cam = cam;
 		this.level = level;
+		this.state = state;
 		entities = new ArrayList<Entity>();
 		world = new World(new Vector2(0, 0), false);
 		rayhandler = new RayHandler(world);
@@ -50,7 +52,6 @@ public class Level {
 
 		
 		pl = new PointLight(rayhandler, 100, new Color(0,0,0,1), 250, cam.position.x, cam.position.y);
-		new DirectionalLight(rayhandler, 100, new Color(0.15f, 0.15f, 0, 1), -90);
 		
 		
 	}
@@ -65,6 +66,10 @@ public class Level {
 		}
 		sb.end();
 		
+	}
+	
+	public void nextLevel() {
+		state.nextLevel();
 	}
 	
 	public void update() {
@@ -88,13 +93,16 @@ public class Level {
 		rayhandler.setCombinedMatrix((OrthographicCamera) cam);
 		rayhandler.updateAndRender();
 
-		if(removeEntities) entities.clear();
+		if(removeEntities) {
+			entities.clear();
+			rayhandler.removeAll();
+		}
 	}
 	
 	public void destroy() {
 		for(Entity e : entities) {
 			e.active = false;
-			removeEntities = true;
 		}
+		removeEntities = true;
 	}
 }

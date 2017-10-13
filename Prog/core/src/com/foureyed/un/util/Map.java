@@ -1,7 +1,5 @@
 package com.foureyed.un.util;
 
-import java.util.Random;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -20,10 +18,9 @@ public class Map {
 	 * beroende på färgen lägger den till olika entities i banans entity lista
 	 * getwidth och getheight används för att få bredden på mapen (i tiles dvs 32ggr större)
 	 * */
-	
+ 	
 	
 	private Pixmap pm;
-	private Random random = new Random();
 	
 	public Map(String path, Level world, World b2world) {
 		pm = new Pixmap(Gdx.files.internal(path));
@@ -38,30 +35,33 @@ public class Map {
 				
 				switch (pix) {
 				case 0xff0000ff:
-					world.entities.add(new Player(new Vector2(x*32, -y*32), world));
+					world.entities.add(new Player(new Vector2(x*32, -y*32), world, world.state));
 					break;
 				case 0x000000ff:
-					if(random.nextInt(10) == 3)
-						world.entities.add(new Tile(new Vector2(x*32, -y*32), Assets.tile[1][0], EntityID.TILE, 1, b2world));
-					else
-						world.entities.add(new Tile(new Vector2(x*32, -y*32), Assets.tile[1][2], EntityID.TILE, 1, b2world));
+					world.entities.add(new Tile(new Vector2(x*32, -y*32), Assets.tile[1][2], EntityID.TILE, 1, b2world));
 					break;
 				case 0x333333ff:
 					world.entities.add(new Tile(new Vector2(x*32, -y*32), Assets.tile[0][2], EntityID.TILE, 1, b2world));
 					break;
 				case 0x666666ff:
 					world.entities.add(new Tile(new Vector2(x*32, -y*32), Assets.tile[0][1], EntityID.TILE, 1, b2world));
-					if(random.nextInt(3) == 1)
-						world.entities.add(new Tile(new Vector2(x*32, -y*32+32), Assets.tile[0][0], EntityID.BGTILE, 2, b2world));
 					break;
 				case 0x999999ff:
-					if(random.nextInt(3) == 2)
-						world.entities.add(new Tile(new Vector2(x*32, -y*32), Assets.tile[1][1], EntityID.TILE, 1, b2world));
-					else 
-						world.entities.add(new Tile(new Vector2(x*32, -y*32), Assets.tile[2][0], EntityID.TILE, 1, b2world));
+					world.entities.add(new Tile(new Vector2(x*32, -y*32), Assets.tile[1][1], EntityID.TILE, 1, b2world));
 					break;
 				case 0xccccccff:
 					world.entities.add(new Tile(new Vector2(x*32, -y*32), Assets.tile[2][2], EntityID.BGTILE, 0, b2world));
+					break;
+				case 0x0000ffff:
+					world.entities.add(new Tile(new Vector2(x*32, -y*32), Assets.tile[2][2], EntityID.BGTILE, 0, b2world));
+					world.entities.add(new Tile(new Vector2(x*32, -y*32), Assets.tile[0][0], EntityID.SPIKE, 1, b2world));
+					break;
+				case 0xff00ffff:
+					world.entities.add(new Tile(new Vector2(x*32, -y*32), Assets.tile[2][2], EntityID.BGTILE, 0, b2world));
+					world.entities.add(new Tile(new Vector2(x*32, -y*32), Assets.tile[1][0], EntityID.SPIKE, 1, b2world));
+					break;
+				case 0x00ff00ff:
+					world.entities.add(new Tile(new Vector2(x*32, -y*32), Assets.tile[2][2], EntityID.GOAL, 0, b2world));
 					break;
 				case 0xffff00ff:
 					world.entities.add(new Tile(new Vector2(x*32, -y*32), Assets.tile[2][1], EntityID.BGTILE, 1, b2world));

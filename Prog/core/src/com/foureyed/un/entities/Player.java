@@ -7,22 +7,21 @@ import com.badlogic.gdx.math.Vector2;
 import com.foureyed.un.feGame;
 import com.foureyed.un.gamestates.Playstate;
 import com.foureyed.un.util.Assets;
+import com.foureyed.un.util.Collider;
 import com.foureyed.un.util.GravCollider;
 import com.foureyed.un.util.Level;
 
 public class Player extends Entity{
 	
-	//spelarens grav kollider som sköter kollisioner och gravitiation
-	GravCollider gcol;
-	//Världen som spelaren är i
-	Level world;
-	//maxspeed = högsta hastigheten, xvel = nuvarande hastigheten
-	private float maxSpeed = 5, xvel = .5f;
+	private GravCollider gcol;
+	private Level world;
+	private Playstate state;
+	private float maxSpeed = 6, xvel = .5f;
 	
 	
-	public Player(Vector2 pos, Level world) {
+	public Player(Vector2 pos, Level world, Playstate state) {
 		super(pos, new Vector2(32, 32), EntityID.PLAYER, 2);
-		
+		this.state = state;
 		this.world = world;
 		gcol = new GravCollider(this, world, maxSpeed);
 	}
@@ -54,8 +53,21 @@ public class Player extends Entity{
 			feGame.setState(new Playstate());
 		}
 		
+		for(Entity e : world.entities) {
+			if(e.id == EntityID.SPIKE) {
+				if(this.gcol.getBottomCollider().isColliding(new Collider(e.pos, e.size))) {
+					state.reset();
+				}
+			}
+			if(e.id == EntityID.GOAL) {
+				if(this.gcol.getBottomCollider().isColliding(new Collider(e.pos, e.size))) {
+					world.nextLevel();
+				}
+			}
+		}
 		
-		gcol.handleGravity(0.3f);
+		
+		if(!Gdx.input.isKeyPressed(Input.Keys.Q)) gcol.handleGravity(0.3f);
 		gcol.handleCollisions(EntityID.TILE);
 	}
 
